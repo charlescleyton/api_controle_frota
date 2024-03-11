@@ -12,7 +12,7 @@ module.exports = {
             return retorno;
         }
         catch (error) {
-            return "Motorista já cadastado"
+            return "Motorista já cadastrado"
         }
     },
 
