@@ -1,17 +1,17 @@
 const express = require("express")
 var moment = require('moment');
 
-const Veiculos = require("../model/Veiculos")
+const Automoveis = require("../model/Automoveis")
 const Motoristas = require("../model/Motoristas");
-const VeiculosUtilizados = require("../model/VeiculosUtilizados");
+const AutomoveisUtilizados = require("../model/AltomoveisUtilizados");
 
 module.exports = {
 
-    async retornoVeiculosUtilizados() {
-        const retorno = await VeiculosUtilizados.findAll({
+    async retornoAutomoveisUtilizados() {
+        const retorno = await AutomoveisUtilizados.findAll({
             include: [
                 { model: Motoristas, attributes: ['nome'] },
-                { model: Veiculos, attributes: ['cor', 'placa', 'marca'] }
+                { model: Automoveis, attributes: ['cor', 'placa', 'marca'] }
             ]
         });
         return retorno;
@@ -20,7 +20,7 @@ module.exports = {
     async inserirDataTermino(req) {
         const verificarData = await this.verificaData(req.body.id, req.body.data_termino);
         if (verificarData == true) {
-            await VeiculosUtilizados.update({
+            await AutomoveisUtilizados.update({
                 data_termino: this.tratarDada(req.body.data_termino),
             }, {
                 where: {
@@ -34,7 +34,7 @@ module.exports = {
 
 
     async verificaData(id, termino) {
-        const verificaData = await VeiculosUtilizados.findOne({
+        const verificaData = await AutomoveisUtilizados.findOne({
             where: {
                 id: id
             },
@@ -47,19 +47,19 @@ module.exports = {
     },
 
 
-    async cadastraUsuarioVeiculo(req) {
+    async cadastraUsuarioautomovel(req) {
         let dataInicio = req.body.data_inicio ? req.body.data_inicio : moment().format('YYYY-MM-DD HH:mm:ss');
         let dataTermino = req.body.data_termino ? req.body.data_termino : null;
         let placa = req.body.placa;
         let motorista = req.body.motorista_id;
 
-        const validaPlaca = await this.validaVeiculo(placa, dataInicio);
+        const validaPlaca = await this.validaautomovel(placa, dataInicio);
         const validarMotorista = await this.validaMotorista(motorista, dataInicio);
 
         if (validaPlaca == "NOK" || validarMotorista == "NOK") {
             return "Verifique as condições para validação"
         } else {
-            const retorno = await VeiculosUtilizados.create({
+            const retorno = await AutomoveisUtilizados.create({
                 motorista_id: req.body.motorista_id,
                 placa: req.body.placa,
                 data_inicio: dataInicio,
@@ -70,8 +70,8 @@ module.exports = {
         }
     },
 
-    async validaVeiculo(placa, dataInicio) {
-        const dados = await VeiculosUtilizados.findAll({
+    async validaautomovel(placa, dataInicio) {
+        const dados = await AutomoveisUtilizados.findAll({
             where: {
                 placa: placa,
             },
@@ -83,7 +83,7 @@ module.exports = {
 
 
     async validaMotorista(idMotorista, dataInicio) {
-        const dados = await VeiculosUtilizados.findAll({
+        const dados = await AutomoveisUtilizados.findAll({
             where: {
                 motorista_id: idMotorista,
             },

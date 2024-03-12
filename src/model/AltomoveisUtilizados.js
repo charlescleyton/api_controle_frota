@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const Motoristas = require('./Motoristas');
-const Veiculos = require('./Veiculos');
+const Automoveis = require('./Automoveis');
 const db = require('../config/database');
 
 
-const VeiculosUtilizados = db.define('veiculos_utilizados', {
+const AutomoveisUtilizados = db.define('automoveis_utilizados', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -29,7 +29,7 @@ const VeiculosUtilizados = db.define('veiculos_utilizados', {
   placa: {
     type: Sequelize.STRING(7),
     references: {
-      model: 'veiculos',
+      model: 'automoveis',
       key: 'placa'
     },
     allowNull: false
@@ -43,10 +43,10 @@ const VeiculosUtilizados = db.define('veiculos_utilizados', {
   timestamps: false
 });
 
-Motoristas.hasMany(VeiculosUtilizados, { foreignKey: 'motorista_id' });
-VeiculosUtilizados.belongsTo(Motoristas, { foreignKey: 'motorista_id' });
+Motoristas.hasMany(AutomoveisUtilizados, { foreignKey: 'motorista_id' });
+AutomoveisUtilizados.belongsTo(Motoristas, { foreignKey: 'motorista_id' });
 
-Veiculos.hasMany(VeiculosUtilizados, { foreignKey: 'placa' });
-VeiculosUtilizados.belongsTo(Veiculos, { foreignKey: 'placa' });
+Automoveis.hasMany(AutomoveisUtilizados, { foreignKey: 'placa' });
+AutomoveisUtilizados.belongsTo(Automoveis, { foreignKey: 'placa' });
 
-module.exports = VeiculosUtilizados;
+module.exports = AutomoveisUtilizados;

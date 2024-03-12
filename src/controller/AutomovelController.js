@@ -1,10 +1,10 @@
-const Veiculos = require("../model/Veiculos")
+const Automoveis = require("../model/Automoveis")
 
 module.exports = {
 
-    async inserirVeiculo(req) {
+    async inserirAutomovel(req) {
         try {
-            const retorno = await Veiculos.create({
+            const retorno = await Automoveis.create({
                 placa: req.body.placa,
                 cor: req.body.cor,
                 marca: req.body.marca,
@@ -15,14 +15,14 @@ module.exports = {
         }
     },
 
-    async atualizarVeiculo(req) {
-        const veiculo = await Veiculos.findOne({
+    async atualizarAutomovel(req) {
+        const automovel = await Automoveis.findOne({
             where: { placa: req.body.placa, }
         });
-        if (!veiculo) {
+        if (!automovel) {
             return "Automóvel não Exite";
         }
-        await Veiculos.update({
+        await Automoveis.update({
             placa: req.body.placa,
             cor: req.body.cor,
             marca: req.body.marca,
@@ -34,14 +34,14 @@ module.exports = {
         return "Automável Atualizado com sucesso";
     },
 
-    async excluiVeiculo(req) {
-        const veiculo = await Veiculos.findOne({
+    async excluiAutomovel(req) {
+        const automovel = await Automoveis.findOne({
             where: { placa: req.params.placa, }
         });
-        if (!veiculo) {
+        if (!automovel) {
             return "Automóvel não Localizado";
         }
-        await Veiculos.destroy({
+        await Automoveis.destroy({
             where: {
                 placa: req.params.placa
             }
@@ -59,7 +59,7 @@ module.exports = {
         if (cor) {
             where.cor = cor;
         }
-        const retorno = await Veiculos.findAll({ where });
+        const retorno = await Automoveis.findAll({ where });
 
         if (retorno.length == 0) {
             return "Automóvel não localizado"

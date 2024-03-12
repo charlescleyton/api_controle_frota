@@ -2,9 +2,9 @@ const express = require("express")
 const { Op } = require("sequelize");
 var moment = require('moment');
 
-const VeiculoController = require("./controller/VeiculoController");
+const AutomovelController = require("./controller/AutomovelController");
 const MotoristaController = require("./controller/MotoristaController");
-const VeiculosUtilizadosController = require("./controller/VeiculosUtilizadosController");
+const AutomoveisUtilizadosController = require("./controller/AutomoveisUtilizadosController");
 
 
 const app = express()
@@ -13,22 +13,22 @@ const porta = 3001
 
 // Cadastro de automóvel:  
 app.post("/inserir_automovel", async (req, res) => {
-    const retorno = await VeiculoController.inserirVeiculo(req)
+    const retorno = await AutomovelController.inserirAutomovel(req)
     res.send(retorno)
 })
 
 app.put('/atualizar_automovel', async (req, res) => {
-    const retorno = await VeiculoController.atualizarVeiculo(req)
+    const retorno = await AutomovelController.atualizarAutomovel(req)
     res.send(retorno)
 })
 
 app.delete('/deletar_automovel/:placa', async (req, res) => {
-    const retorno = await VeiculoController.excluiVeiculo(req)
+    const retorno = await AutomovelController.excluiAutomovel(req)
     res.send(retorno)
 })
 
 app.get("/retornar_automoveis", async (req, res) => {
-    const retorno = await VeiculoController.recuperaAutomovel(req)
+    const retorno = await AutomovelController.recuperaAutomovel(req)
     res.send(retorno)
 })
 
@@ -55,19 +55,19 @@ app.get("/retornar_motoristas", async (req, res) => {
 });
 
 app.put('/iserir_termino', async (req, res) => {
-    const retorno = await VeiculosUtilizadosController.inserirDataTermino(req);
+    const retorno = await AutomoveisUtilizadosController.inserirDataTermino(req);
     res.send(retorno)
 })
 
 
 // Utilização de um Automóvel
-app.post("/cadastar_usuario_veiculo", async (req, res) => {
- const retorno = await VeiculosUtilizadosController.cadastraUsuarioVeiculo(req);
+app.post("/cadastar_usuario_automovel", async (req, res) => {
+ const retorno = await AutomoveisUtilizadosController.cadastraUsuarioAutomovel(req);
  res.send(retorno);
 })
 
-app.get("/retornar_veiculos_utilizados", async (req, res) => {
-    const retorno = await VeiculosUtilizadosController.retornoVeiculosUtilizados(req);
+app.get("/retornar_automoveis_utilizados", async (req, res) => {
+    const retorno = await AutomoveisUtilizadosController.retornoAutomoveisUtilizados(req);
     res.send(retorno);
 });
 

@@ -1,4 +1,4 @@
-const Veiculos = require("../controller/VeiculoController");
+const Automoveis = require("../controller/AutomovelController");
 
 describe("Testes para funções do módulo Automovel", () => {
     describe("cadastrarMotorista", () => {
@@ -11,7 +11,7 @@ describe("Testes para funções do módulo Automovel", () => {
                 },
             };
 
-            const resultado = await Veiculos.inserirVeiculo(req);
+            const resultado = await Automoveis.inserirAutomovel(req);
 
             expect(typeof resultado).toBe("object");
             expect(resultado.placa).toBe("VEI0101");
@@ -30,7 +30,7 @@ describe("Testes para funções do módulo Automovel", () => {
             },
         };
 
-        const resultado = await Veiculos.inserirVeiculo(req);
+        const resultado = await Automoveis.inserirAutomovel(req);
 
         expect(typeof resultado).toBe("string");
         expect(resultado).toBe("Placa já foi cadastrada");
@@ -40,56 +40,60 @@ describe("Testes para funções do módulo Automovel", () => {
         it("deve excluir um automovel existente com sucesso", async () => {
             const req = {
                 params: {
-                    placa: "VEI0101",
+                    placa: "MNO7890",
                 },
             };
 
-            const resultado = await Veiculos.excluiVeiculo(req);
+            const resultado = await Automoveis.excluiAutomovel(req);
 
             expect(typeof resultado).toBe("string");
             expect(resultado).toBe("Automóvel Excluído com sucesso");
         });
 
         it("deve retornar 'Automóvel não Localizado' se o automovel não existir", async () => {
+            // Simula a exclusão de um veiculo com Placa que não existe em vez de iniciar com 'J' 
+            // inseriu a letra 'N' propositalmente para induzir o retorno. 
             const req = {
                 params: {
-                    placa: "NNO7890",
+                    placa: "NKL3456",
                 },
             };
-            const resultado = await Veiculos.excluiVeiculo(req);
+            const resultado = await Automoveis.excluiAutomovel(req);
 
             expect(typeof resultado).toBe("string");
             expect(resultado).toBe("Automóvel não Localizado");
         });
     });
 
-    describe("atualizarVeiculo", () => {
+    describe("Atualizar Automovel", () => {
         it("deve Atualizar um Automóvel com sucesso", async () => {
-            // Simula a atualização da cor do automóvel.
+            // Simula a atualização da cor do automóvel de 'Branco'para 'Prata'. 
             const req = {
                 body: {
-                    placa: "MNO7890",
-                    cor: "preto",
-                    marca: "Hyundai"
+                    placa: "JKL3456",
+                    cor: "Prata",
+                    marca: "Toyota"
                 },
             };
 
-            const resultado = await Veiculos.atualizarVeiculo(req);
+            const resultado = await Automoveis.atualizarAutomovel(req);
 
             expect(typeof resultado).toBe("string");
             expect(resultado).toBe("Automável Atualizado com sucesso");
         });
 
         it("deve retornar 'Automóvel não Exite' inserção de pplaca auterada", async () => {
+            // Simula a atualização de um veiculo com Placa que não existe em vez de iniciar com 'M' 
+            // inseriu a letra 'N' propositalmente para induzir o retorno. 
             const req = {
                 body: {
-                    placa: "NNO7890",
-                    cor: "preto",
-                    marca: "Hyundai"
+                    placa: "NKL3456",
+                    cor: "Branco",
+                    marca: "Toyota"
                 },
             };
 
-            const resultado = await Veiculos.atualizarVeiculo(req);
+            const resultado = await Automoveis.atualizarAutomovel(req);
 
             expect(typeof resultado).toBe("string");
             expect(resultado).toBe("Automóvel não Exite");
@@ -98,7 +102,7 @@ describe("Testes para funções do módulo Automovel", () => {
 
     describe("Retorna Automóveis", () => {
         it("deve retornar Automóvel com base na Cor e Marca", async () => {
-            // Simule uma requisição pelo nomeo, pode ser feito tb com partes do nome por exemplo "ilva"     
+            // Simule uma requisição pela Cor e Marca     
             const req = {
                 query: {
                     cor: "Preto",
@@ -106,7 +110,7 @@ describe("Testes para funções do módulo Automovel", () => {
                 },
             };
 
-            const resultado = await Veiculos.recuperaAutomovel(req);
+            const resultado = await Automoveis.recuperaAutomovel(req);
 
             expect(Array.isArray(resultado)).toBe(true);
             resultado.forEach((automovel) => {
@@ -117,15 +121,14 @@ describe("Testes para funções do módulo Automovel", () => {
             });
         });
 
-        it("deve retornar um array de Automóveis com base na Cor", async () => {
-            // Simule uma requisição com uma cor
+        it("deve retornar um Automóveis com base na Cor", async () => {
             const req = {
                 query: {
                     cor: "Azul",
                 },
             };
 
-            const resultado = await Veiculos.recuperaAutomovel(req);
+            const resultado = await Automoveis.recuperaAutomovel(req);
 
             expect(Array.isArray(resultado)).toBe(true);
 
@@ -136,15 +139,14 @@ describe("Testes para funções do módulo Automovel", () => {
         });
 
 
-        it("deve retornar um array de Automóveis com base na Marca", async () => {
-            // Simule uma requisição com uma Marca
+        it("deve retornar um Automóveis com base na Marca", async () => {
             const req = {
                 query: {
                     marca: "Toyota",
                 },
             };
 
-            const resultado = await Veiculos.recuperaAutomovel(req);
+            const resultado = await Automoveis.recuperaAutomovel(req);
 
             expect(Array.isArray(resultado)).toBe(true);
 
@@ -155,7 +157,7 @@ describe("Testes para funções do módulo Automovel", () => {
         });
 
         it("deve retornar mensagem de 'Automóvel não localizado'", async () => {
-            // Simule uma requisição de cor não existe na Base
+            // Simule uma requisição de cor que não existe na Base
             const req = {
                 query: {
                     cor: "Verde",
@@ -163,7 +165,7 @@ describe("Testes para funções do módulo Automovel", () => {
                 },
             };
 
-            const resultado = await Veiculos.recuperaAutomovel(req);
+            const resultado = await Automoveis.recuperaAutomovel(req);
 
             expect(typeof resultado).toBe("string");
             expect(resultado).toBe("Automóvel não localizado");

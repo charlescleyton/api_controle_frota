@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../config/database');
 
-const Veiculos = db.define('veiculos', {
+const Automoveis = db.define('automoveis', {
   placa: {
     type: Sequelize.STRING(7),
     allowNull: false,
@@ -20,4 +20,4 @@ const Veiculos = db.define('veiculos', {
   timestamps: false
 });
 
-module.exports = Veiculos;
+module.exports = Automoveis;
