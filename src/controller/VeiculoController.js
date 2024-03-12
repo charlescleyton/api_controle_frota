@@ -11,11 +11,17 @@ module.exports = {
             })
             return retorno
         } catch (error) {
-            return "Este Veículo já foi cadastrado"
+            return "Placa já foi cadastrada"
         }
     },
 
     async atualizarVeiculo(req) {
+        const veiculo = await Veiculos.findOne({
+            where: { placa: req.body.placa, }
+        });
+        if (!veiculo) {
+            return "Automóvel não Exite";
+        }
         await Veiculos.update({
             placa: req.body.placa,
             cor: req.body.cor,
@@ -25,19 +31,26 @@ module.exports = {
                 placa: req.body.placa
             }
         });
-        return "Veículo Atualizado com sucesso";
+        return "Automável Atualizado com sucesso";
     },
 
-    async excluiVeiculo(req){
+    async excluiVeiculo(req) {
+        const veiculo = await Veiculos.findOne({
+            where: { placa: req.params.placa, }
+        });
+        if (!veiculo) {
+            return "Automóvel não Localizado";
+        }
         await Veiculos.destroy({
             where: {
                 placa: req.params.placa
             }
         });
-        return 'Veiculo Deletado com sucesso';
+        return 'Automóvel Excluído com sucesso';
     },
 
-    async recuperaAutomovel(req){
+    async recuperaAutomovel(req) {
+
         const { marca, cor } = req.query;
         let where = {};
         if (marca) {
@@ -47,6 +60,10 @@ module.exports = {
             where.cor = cor;
         }
         const retorno = await Veiculos.findAll({ where });
+
+        if (retorno.length == 0) {
+            return "Automóvel não localizado"
+        }
         return retorno;
     }
 }

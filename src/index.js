@@ -17,17 +17,17 @@ app.post("/inserir_automovel", async (req, res) => {
     res.send(retorno)
 })
 
-app.put('/atualizar_veiculo', async (req, res) => {
+app.put('/atualizar_automovel', async (req, res) => {
     const retorno = await VeiculoController.atualizarVeiculo(req)
     res.send(retorno)
 })
 
-app.delete('/deletar_veiculo/:placa', async (req, res) => {
+app.delete('/deletar_automovel/:placa', async (req, res) => {
     const retorno = await VeiculoController.excluiVeiculo(req)
     res.send(retorno)
 })
 
-app.get("/retornar_veiculos", async (req, res) => {
+app.get("/retornar_automoveis", async (req, res) => {
     const retorno = await VeiculoController.recuperaAutomovel(req)
     res.send(retorno)
 })

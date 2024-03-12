@@ -17,48 +17,53 @@ module.exports = {
     },
 
     async atualizaMotorista(req) {
-        try {
-            await Motoristas.update({
-                nome: req.body.nome,
-                cpf: req.body.cpf,
-            }, {
-                where: {
-                    motorista_id: req.body.motorista_id
-                }
-            });
-            return "Motorista atualizado com sucesso";
-
-        } catch (error) {
-            return "CPF Invalido"
+        const motorista = await Motoristas.findOne({
+            where: { cpf: req.body.cpf }
+        });
+        if (!motorista) {
+            return "Motorista não existe";
         }
+        await Motoristas.update({
+            nome: req.body.nome,
+            cpf: req.body.cpf,
+        }, {
+            where: {
+                cpf: req.body.cpf
+            }
+        });
+        return "Motorista atualizado com sucesso";
     },
 
     async excluirMotorista(req) {
+        const motorista = await Motoristas.findOne({
+            where: { cpf: req.params.cpf }
+        });
+        if (!motorista) {
+            return "Motorista não localizado";
+        }
+
         await Motoristas.destroy({
-            where: {
-                cpf: req.params.cpf
-            }
+            where: { cpf: req.params.cpf }
         });
         return "Motorista deletado com sucesso";
     },
 
     async retornaMoristas(req) {
-        try {
-            const { nome, cpf } = req.query;
-            let where = {};
-            if (nome) {
-                where.nome = {
-                    [Op.like]: `%${nome}%`
-                };
-            }
-            if (cpf) {
-                where.cpf = cpf
-            }
-            const retorno = await Motoristas.findAll({ where });
-            return retorno;
+        const { nome, cpf } = req.query;
+        let where = {};
+        if (nome) {
+            where.nome = {
+                [Op.like]: `%${nome}%`
+            };
+        }
+        if (cpf) {
+            where.cpf = cpf
+        }
+        const retorno = await Motoristas.findAll({ where });
 
-        } catch (error) {
+        if (retorno.length == 0) {
             return "Motorista não localizado"
         }
+        return retorno;
     }
 }
