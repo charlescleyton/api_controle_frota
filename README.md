@@ -7,7 +7,7 @@ A API segue os critérios solicitados pela empresa requerente seguindo criterios
 obs:
 
 * Esta API possibilita a consulta do motorista pelo **CPF**, pelo **nome**, **parte do nome** (em caso não tenha o nome completo);
-* Permite consultar o veiculo pela **Marca e Cor** podendo também consultar apenas pela **cor** ou apenas pela **marca**.
+* Permite consultar o automovel pela **Marca e Cor** podendo também consultar apenas pela **cor** ou apenas pela **marca**.
 
 ## Instruções para execução da aplicação
 
@@ -67,7 +67,7 @@ na pasta src/config:
 
 ###### DELETE - `localhost:3001/deletar_automovel/VEI0101`
 
-* Para deletar insira a placa do veiculo;
+* Para deletar insira a placa do automóvel;
 
 ###### GET - Recupera Automoveis
 
@@ -113,7 +113,7 @@ na pasta src/config:
 
 ##### Utilização de um Automóvel
 
-###### POST - `localhost:3001/cadastar_usuario_veiculo`
+###### POST - `localhost:3001/cadastar_usuario_automovel`
 
 * Cadastrar utilizacao do Automovel
   * exemplo request
@@ -140,6 +140,6 @@ na pasta src/config:
 }
 ```
 
-###### GET - `localhost:3001/retornar_veiculos_utilizados`
+###### GET - `localhost:3001/retornar_automoveis_utilizados`
 
 * Retorna todos os automoveis utilizados
