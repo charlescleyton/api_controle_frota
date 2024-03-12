@@ -7,14 +7,27 @@ const AutomoveisUtilizados = require("../model/AltomoveisUtilizados");
 
 module.exports = {
 
-    async retornoAutomoveisUtilizados() {
-        const retorno = await AutomoveisUtilizados.findAll({
-            include: [
-                { model: Motoristas, attributes: ['nome'] },
-                { model: Automoveis, attributes: ['cor', 'placa', 'marca'] }
-            ]
-        });
-        return retorno;
+    async cadastraUsuarioAutomovel(req) {
+        let dataInicio = req.body.data_inicio ? req.body.data_inicio : moment().format('YYYY-MM-DD HH:mm:ss');
+        let dataTermino = req.body.data_termino ? req.body.data_termino : null;
+        let placa = req.body.placa;
+        let motorista = req.body.motorista_id;
+
+        const validaPlaca = await this.validaautomovel(placa, dataInicio);
+        const validarMotorista = await this.validaMotorista(motorista, dataInicio);
+
+        if (validaPlaca == "NOK" || validarMotorista == "NOK") {
+            return "Este Automovel está sendo utilizado ou este Motorista está empenhado"
+        } else {
+            const retorno = await AutomoveisUtilizados.create({
+                motorista_id: req.body.motorista_id,
+                placa: req.body.placa,
+                data_inicio: dataInicio,
+                data_termino: dataTermino,
+                motivo: req.body.motivo,
+            })
+            return retorno
+        }
     },
 
     async inserirDataTermino(req) {
@@ -29,9 +42,18 @@ module.exports = {
             });
             return "Data de termino inserida com sucesso"
         }
-        return "Data de termino não pode ser menor que a data de inicio"
+        return "Data termino não pode ser menor que a data inicio"
     },
 
+    async retornoAutomoveisUtilizados() {
+        const retorno = await AutomoveisUtilizados.findAll({
+            include: [
+                { model: Motoristas, attributes: ['nome'] },
+                { model: Automoveis, attributes: ['cor', 'placa', 'marca'] }
+            ]
+        });
+        return retorno;
+    },
 
     async verificaData(id, termino) {
         const verificaData = await AutomoveisUtilizados.findOne({
@@ -44,30 +66,6 @@ module.exports = {
             return true;
         }
         return false;
-    },
-
-
-    async cadastraUsuarioautomovel(req) {
-        let dataInicio = req.body.data_inicio ? req.body.data_inicio : moment().format('YYYY-MM-DD HH:mm:ss');
-        let dataTermino = req.body.data_termino ? req.body.data_termino : null;
-        let placa = req.body.placa;
-        let motorista = req.body.motorista_id;
-
-        const validaPlaca = await this.validaautomovel(placa, dataInicio);
-        const validarMotorista = await this.validaMotorista(motorista, dataInicio);
-
-        if (validaPlaca == "NOK" || validarMotorista == "NOK") {
-            return "Verifique as condições para validação"
-        } else {
-            const retorno = await AutomoveisUtilizados.create({
-                motorista_id: req.body.motorista_id,
-                placa: req.body.placa,
-                data_inicio: dataInicio,
-                data_termino: dataTermino,
-                motivo: req.body.motivo,
-            })
-            return retorno
-        }
     },
 
     async validaautomovel(placa, dataInicio) {
