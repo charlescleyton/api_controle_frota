@@ -17,7 +17,9 @@ Copie o .env.example para .env (.env-example da raiz já esta com o exemplo de c
 
 Para instalar as dependencias execute o comando a seguir:
 
-`npm install`
+```
+npm install
+```
 
 ### Banco de dados
 
@@ -29,19 +31,27 @@ na pasta src/config:
 
 ### Testes da Aplicacao
 
-###### Instalando o Framewor [JEST](https://jestjs.io/pt-BR/) e o [Supertest](https://ladjs.github.io/superagent/):
+Instalando o Framewor [JEST](https://jestjs.io/pt-BR/) e o [Supertest](https://ladjs.github.io/superagent/):
 
-`npm install --save-dev jest supertest`
+```
+npm install --save-dev jest supertest
+```
 
-###### Rodando os testes:
+Rodando os testes:
 
-`npm test`
+```
+npm test
+```
 
 ### Rotas da Aplicação
 
-##### Cadastro de Automoveis
+#### Cadastro de Automoveis
 
-###### POST - `localhost:3001/inserir_automovel`
+##### POST -
+
+```
+localhost:3001/inserir_automovel
+```
 
 * Inserir novo automovel exemplo request:
 
@@ -53,7 +63,11 @@ na pasta src/config:
  }
 ```
 
-###### PUT - `localhost:3001/atualizar_automovel`
+##### PUT -
+
+```
+localhost:3001/atualizar_automovel
+```
 
 * Atualizar Automovel exemplo request:
 
@@ -65,20 +79,40 @@ na pasta src/config:
  }
 ```
 
-###### DELETE - `localhost:3001/deletar_automovel/VEI0101`
+##### DELETE - l
+
+```
+ocalhost:3001/deletar_automovel/VEI0101
+```
 
 * Para deletar insira a placa do automóvel;
 
-###### GET - Recupera Automoveis
+##### GET - Recupera Automoveis
 
-* Recupera todos os Automoveis Cadastrados - `localhost:3001/retornar_automoveis`
-* Recupera Automovel por marca - `localhost:3001/retornar_automoveis?marca=chevrolet`
-* Recupera Automovel por Cor - `localhost:3001/retornar_automoveis?cor=branco`
-* Recupera Automovel por Cor e Marca - `http://127.0.0.1:3001/retornar_automoveis?cor=branco&marca=chevrolet`
+* Recupera todos os Automoveis Cadastrados -
+  ```
+  localhost:3001/retornar_automoveis
+  ```
+* Recupera Automovel por marca -
+  ```
+  localhost:3001/retornar_automoveis?marca=chevrolet
+  ```
+* Recupera Automovel por Cor -
+  ```
+  localhost:3001/retornar_automoveis?cor=branco
+  ```
+* Recupera Automovel por Cor e Marca -
+  ```
+  localhost:3001/retornar_automoveis?cor=branco&marca=chevrolet
+  ```
 
-##### Cadastro de Motorista:
+#### Cadastro de Motorista:
 
-###### POST -  `localhost:3001/cadastar_motorista`
+##### POST -
+
+```
+localhost:3001/cadastar_motorista
+```
 
 * Inserir novo motorista exemplo request:
 
@@ -89,7 +123,11 @@ na pasta src/config:
 }
 ```
 
-###### PUT - `localhost:3001/atualizar_motorista`
+##### PUT -
+
+```
+localhost:3001/atualizar_motorista
+```
 
 * Atualizar motorista exemplo request:
 
@@ -101,19 +139,36 @@ na pasta src/config:
 }
 ```
 
-###### DELETE - `localhost:3001//excluir_motorista/56789012345`
+##### DELETE -
+
+```
+ localhost:3001//excluir_motorista/56789012345
+```
 
 * Para deletar insira o CPF do motorista;
 
-###### GET - Recupera Motoristas
+##### GET - Recupera Motoristas
 
-* Recupera todos motoristas - `localhost:3001/retornar_motoristas`
-* Recupera motorista por CPF - `localhost:3001/retornar_motoristas?cpf=....`
-* Recupera motorista por nome ou **parte do nome** - `localhost:3001/retornar_motoristas?nome=...`
+* Recupera todos motoristas
+  ```
+  - localhost:3001/retornar_motoristas
+  ```
+* Recupera motorista por CPF -
+  ```
+   localhost:3001/retornar_motoristas?cpf=....
+  ```
+* Recupera motorista por nome ou **parte do nome** -
+  ```
+   localhost:3001/retornar_motoristas?nome=...
+  ```
 
-##### Utilização de um Automóvel
+#### Utilização de um Automóvel
 
-###### POST - `localhost:3001/cadastar_usuario_automovel`
+##### POST -
+
+```
+ localhost:3001/cadastar_usuario_automovel
+```
 
 * Cadastrar utilizacao do Automovel
   * exemplo request
@@ -128,7 +183,11 @@ na pasta src/config:
 }
 ```
 
-###### PUT -` localhost:3001/iserir_termino`
+##### PUT -
+
+```
+ localhost:3001/iserir_termino
+```
 
 * Insere data de termino do uso do Automovel
   * exemplo request
@@ -140,6 +199,10 @@ na pasta src/config:
 }
 ```
 
-###### GET - `localhost:3001/retornar_automoveis_utilizados`
+##### GET -
+
+```
+ localhost:3001/retornar_automoveis_utilizados
+```
 
 * Retorna todos os automoveis utilizados
