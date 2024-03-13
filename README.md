@@ -29,25 +29,19 @@ na pasta src/config:
 * Arquivo Tabela - este arquivo cria a Base de Dados como nome api_controle_frota;
 * Arquivo inserçao - insere dados nas tabelas motoristas, automoveis e automoveis_utiilizados.
 
-### Testes da Aplicacao
+### Executando a Aplicacacao
 
-Instalando o Framewor [JEST](https://jestjs.io/pt-BR/) e o [Supertest](https://ladjs.github.io/superagent/):
-
-```
-npm install --save-dev jest supertest
-```
-
-Rodando os testes:
+Para executar a aplicacao e fazer as consultas atraves dos endpoints uso o comando:
 
 ```
-npm test
+npm run dev
 ```
 
-### Rotas da Aplicação
+### Endpoints da Aplicação
 
 #### Cadastro de Automoveis
 
-##### POST -
+##### POST
 
 ```
 localhost:3001/inserir_automovel
@@ -63,7 +57,7 @@ localhost:3001/inserir_automovel
  }
 ```
 
-##### PUT -
+##### PUT
 
 ```
 localhost:3001/atualizar_automovel
@@ -79,7 +73,7 @@ localhost:3001/atualizar_automovel
  }
 ```
 
-##### DELETE - l
+##### DELETE
 
 ```
 ocalhost:3001/deletar_automovel/VEI0101
@@ -108,7 +102,7 @@ ocalhost:3001/deletar_automovel/VEI0101
 
 #### Cadastro de Motorista:
 
-##### POST -
+##### POST
 
 ```
 localhost:3001/cadastar_motorista
@@ -123,7 +117,7 @@ localhost:3001/cadastar_motorista
 }
 ```
 
-##### PUT -
+##### PUT
 
 ```
 localhost:3001/atualizar_motorista
@@ -139,7 +133,7 @@ localhost:3001/atualizar_motorista
 }
 ```
 
-##### DELETE -
+##### DELETE
 
 ```
  localhost:3001//excluir_motorista/56789012345
@@ -147,7 +141,7 @@ localhost:3001/atualizar_motorista
 
 * Para deletar insira o CPF do motorista;
 
-##### GET - Recupera Motoristas
+##### GET
 
 * Recupera todos motoristas
   ```
@@ -164,7 +158,7 @@ localhost:3001/atualizar_motorista
 
 #### Utilização de um Automóvel
 
-##### POST -
+##### POST
 
 ```
  localhost:3001/cadastar_usuario_automovel
@@ -183,7 +177,7 @@ localhost:3001/atualizar_motorista
 }
 ```
 
-##### PUT -
+##### PUT
 
 ```
  localhost:3001/iserir_termino
@@ -199,10 +193,24 @@ localhost:3001/atualizar_motorista
 }
 ```
 
-##### GET -
+##### GET
 
 ```
  localhost:3001/retornar_automoveis_utilizados
 ```
 
 * Retorna todos os automoveis utilizados
+
+### Testes da Aplicacao
+
+Instalando o Framewor [JEST](https://jestjs.io/pt-BR/) e o [Supertest](https://ladjs.github.io/superagent/):
+
+```
+npm install --save-dev jest supertest
+```
+
+Rodando os testes:
+
+```
+npm test
+```
