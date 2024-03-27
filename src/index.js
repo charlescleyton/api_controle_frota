@@ -1,6 +1,4 @@
 const express = require("express")
-const { Op } = require("sequelize");
-var moment = require('moment');
 
 const AutomovelController = require("./controller/AutomovelController");
 const MotoristaController = require("./controller/MotoristaController");
