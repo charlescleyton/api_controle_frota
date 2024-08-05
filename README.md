@@ -2,7 +2,7 @@
 
 O Framework usado para as requisições HTTP foi o [Express](https://expressjs.com/), outras bibliotecas foram utilizadas para conectar a API ao banco de dados Mysql ([Mysql2](https://sidorares.github.io/node-mysql2/pt-BR/docs) e [Sequelizer](https://sequelize.org/)).
 
-A API segue os critérios solicitados pela empresa requerente seguindo criterios de boas praticas.
+A API segue os critérios de boas praticas.
 
 obs:
 
